@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MathML with MathJax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="../../kraken.min.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../../main.css" />
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      MathML: {
+        extensions: ["content-mathml.js"]
+      },
+      extensions: ["toMathML.js"],
+      asciimath2jax: {
+        delimiters: [['$','$'], ['`','`']]
+      }
+    });
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <script src="math.js" defer></script>
+</head>
+
+<body>
+  <div class="container margin-top">
+    <h1 class="no-margin-bottom">MathML with MathJax</h1>
+    <span><a href="../../index.html">ppk.cartjonye.com</a> </span>
+    <hr />
+    <div class="row">
+      <div class="grid-two-thirds">
+        <h2>About MathML</h2>
+        <p>
+          <a href="https://www.w3.org/Math/">Mathematical Markup Language (MathML)</a> is a mathematical markup language, an application of XML for describing
+          mathematical notations and capturing both its structure and content. MathML is a low-level specification for mathematical
+          and scientific content on the Web and beyond.
+          <br/> MathML is capable to describe complex mathematical expressions and reconstruct it if necessary. But, due to the
+          nature of XML itself, MathML is verbose in design and large in size.
+          <br/> MathML is platform independent, meaning that every software built to use MathML can make use of MathML data.
+        </p>
+        <p>
+          Below is an example of MathML data of the Probability Density Function of Poisson Distribution.
+          <br/> You can learn MathML elements
+          <a href="https://developer.mozilla.org/en-US/docs/Web/MathML/Element">here</a>.
+        </p>
+      </div>
+      <div class="grid-third"></div>
+    </div>
+
+    <div class="row">
+      <div class="grid-two-thirds">
+        <span>MathML input:</span>
+        <pre>
+        <textarea id="input-0" readonly="readonly">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mstyle displaystyle="true">
+  <mi>P</mi>
+  <mrow>
+    <mo>(</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo>)</mo>
+  </mrow>
+  <mo>=</mo>
+  <msup>
+    <mi>e</mi>
+    <mrow>
+      <mo>-</mo><mi>&#x3BB;</mi>
+    </mrow>
+  </msup>
+  <mfrac>
+    <mrow>
+      <msup>
+        <mi>&#x3BB;</mi><mi>x</mi>
+      </msup>
+    </mrow>
+    <mrow>
+      <mi>x</mi><mo>!</mo>
+    </mrow>
+  </mfrac>
+  <mspace width="40px"></mspace>
+  <mi>x</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo>
+  <mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mo>...</mo>
+</mstyle>
+</math>
+        </textarea>
+      </pre>
+      </div>
+      <div class="grid-third">
+        <span>Rendered expressions:</span>
+        <div id="math-0" class="margin-top"></div>
+        <script>
+          // I'm lazy 
+          document.getElementById("math-0").innerHTML = document.getElementById("input-0").value;
+        </script>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="grid-two-thirds">
+        <p></p>
+
+        <h2>About MathJax</h2>
+        <p>
+          <a href="https://www.mathjax.org/">MathJax</a> is a cross-browser JavaScript library that displays mathematical notation in web browsers, using MathML,
+          LaTeX and ASCIIMathML markup. It's easy to install and implement. If your site is using a CMS like Wordpress, Moodle,
+          or Drupal, there may be a plugin to add MathJax to your site already. Or if you write your own HTML, just put
+          <code>&lt;script&gt;&lt;/script&gt;</code> snippet to load MathJax from CDN and you are ready to go.
+          <br /> You can find the documentation
+          <a href="https://www.mathjax.org/#docs">here</a>.
+        </p>
+        <h2>MathML from Mathematical Expressions</h2>
+        <p>
+          Try to type some mathematical expression. The MathML data will be generated automatically.
+          <br /> The following input only validate
+          <a href="http://asciimath.org/" target="_blank">AsciiMath</a> syntax. You can find AsciiMath syntax
+          <a href="http://asciimath.org/#syntax" target="_blank">here</a>. (It's also easy to learn, i promise)
+        </p>
+      </div>
+      <div class="grid-third"></div>
+    </div>
+
+    <div class="row margin-top">
+      <div class="grid-two-thirds">
+        <span>AsciiMath input:</span>
+        <pre>
+          <textarea id="input-1" autocomplete="off" placeholder="Insert asciimath expression here (Hint : try to type 'pi r^2' without quote)"></textarea>
+        </pre>
+        <span>MathML output:</span>
+        <pre>
+          <textarea id="output-1" autocomplete="off" placeholder="Generated mathml will be shown here" readonly="readonly"></textarea>
+        </pre>
+      </div>
+
+      <div class="grid-third">
+        <span>Rendered expressions:</span>
+        <div id="math-1" class="margin-top">
+          ``
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="row margin-top">
+      <div class="grid-two-thirds">
+        <h2>Mathematical Expression from MathML</h2>
+        <p>
+          Please take a note, your MathML data should begin with proper
+          <code>&lt;math&gt;</code> tag. Below is the example of valid
+          <code>&lt;math&gt;</code> tag in MathML.
+          <pre>&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;/math&gt;</pre> You can learn MathML elements
+          <a href="https://developer.mozilla.org/en-US/docs/Web/MathML/Element">here</a>
+        </p>
+      </div>
+      <div class="grid-third"></div>
+    </div>
+
+    <div class="row margin-top">
+      <div class="grid-two-thirds">
+        <span>MathML input:</span>
+        <pre>
+          <textarea id="input-2" autocomplete="off" placeholder="Insert mathml data here"></textarea>
+        </pre>
+      </div>
+      <div class="grid-third">
+        <span>Rendered expressions:</span>
+        <div id="math-2" class="margin-top">
+          <math xmlns="http://www.w3.org/1998/Math/MathML"></math>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="row margin-top">
+      <div class="grid-two-thirds">
+        <p>Entire source code of ppk.cartjonye.com can be found at <a href="https://github.com/cartjonye/ppkweb-demo">here</a>.</p>
+      </div> 
+      <div class="grid-third"></div> 
+    </div>
+  </div>
+</body>
+
+</html>

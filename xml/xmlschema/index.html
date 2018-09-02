@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../../kraken.min.css">
+  <link rel="stylesheet" href="../../main.css">
+  <script src="xmllint.js"></script>
+  <script src="validator.js" defer></script>
+  <title>XML Schema</title>
+</head>
+
+<body>
+  <div class="container margin-top">
+    <h1 class="no-margin-bottom">XML Schema</h1>
+    <span>
+      <a href="../../index.html">ppk.cartjonye.com</a>
+    </span>
+    <hr/>
+    <div class="row">
+      <div class="grid-three-fourths">
+        <h2>About XML Schema</h2>
+        <p>
+          An
+          <a href="https://www.w3.org/standards/xml/schema" target="_blank">XML schema</a> is a description of a type of XML document, typically expressed in terms of constraints on the structure
+          and content of documents of that type, above and beyond the basic syntactical constraints imposed by XML itself.
+          XSD (XML Schema Definition) is a World Wide Web Consortium (W3C) recommendation that specifies how to formally
+          describe the elements in an Extensible Markup Language (XML) document.
+        </p>
+
+        <h2>JavaScript client side XML Schema Validation</h2>
+        <p>
+          The linter is based on the
+          <a href="https://github.com/kripken/xml.js" target="_blank">xmlint.js developed by kripken</a>. You can implement this module by including
+          <a href="xmllint.js" target="_blank">xmlint.js</a> in this page. Call
+          <code>validateXML(Module)</code> function to validate the xml.
+          <br/> Courtesy of
+          <a href="http://syssgx.github.io/xml.js/" target="_blank">syssgx.github.io/xml.js</a>
+        </p>
+        <pre>
+          
+//create an object
+var Module = {
+      xml: xmlData,
+      schema: schemaData,
+      arguments: ["--noout", "--schema", schemaFileName, xmlFileName]
+};
+  
+//and call function
+var xmllint = validateXML(Module);
+        </pre>
+        <p>
+          You can verify an XML data with an XML Schema Definition below. Note that the XML data and XSD must be well formed first
+          before they can be validated.
+        </p>
+        <div class="margin-top">
+          <span>XML data:</span>
+          <pre>
+            <textarea id="input-xml" autocomplete="off" placeholder="Insert xml data here"></textarea>
+          </pre>
+          <span>XSD:</span>
+          <pre>
+            <textarea id="input-xsd" autocomplete="off" placeholder="Insert xsd here"></textarea>
+          </pre>
+          <button type="submit" class="btn active" id="submit-xml">Validate XML</button>
+
+          <div class="margin-top">
+            <span>Validation result :</span>
+            <pre>
+              <textarea id="output-validation" disabled="disabled" autocomplete="off">Validation result will be shown here
+              </textarea>
+            </pre>
+          </div>
+        </div>
+      </div>
+      <div class="grid-fourth"></div>
+    </div>
+    <hr/>
+    <div class="row margin-top">
+      <div class="grid-three-fourths">
+        <p>Entire source code of ppk.cartjonye.com can be found at
+          <a href="https://github.com/cartjonye/ppkweb-demo">here</a>.</p>
+      </div>
+      <div class="grid-fourth"></div>
+    </div>
+  </div>
+</body>
+
+</html>

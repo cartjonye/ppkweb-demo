@@ -22,7 +22,6 @@ function loadWindow() {
     typingDelay(function () {
       var newMathValue = document.getElementById("input-1").value;
       var oldMath = MathJax.Hub.getAllJax("math-1")[0];
-      console.log(MathJax.Hub.getAllJax("math-0")[0]);
       MathJax.Hub.Queue(
         ["Text", oldMath, newMathValue], function () {
           toMathML(MathJax.Hub.getAllJax("math-1")[0], function (mml) {

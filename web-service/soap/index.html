@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../../kraken.min.css">
+  <link rel="stylesheet" href="../../main.css">
+  <script src="vkbeautify.js" defer></script>
+  <script src="soap.js" defer></script>
+  <script src="controller.js" defer></script>
+  <title>SOAP Web Service</title>
+</head>
+
+<body>
+  <div class="container margin-top">
+    <h1 class="no-margin-bottom">SOAP Web Service</h1>
+    <span>
+      <a href="../../index.html">ppk.cartjonye.com</a>
+    </span>
+    <hr/>
+    <div class="row">
+
+      <div class="grid-two-thirds">
+        <h2>About SOAP</h2>
+        <p>
+          <a href="https://www.w3.org/TR/soap/" target="_blank">Simple Object Access Protocol (SOAP)</a> is a messaging protocol specification for exchanging structured information
+          in the implementation of web services in computer networks. Its purpose is to induce extensibility, neutrality
+          and independence. It uses XML Information Set for its message format, and relies on application layer protocols,
+          most often Hypertext Transfer Protocol (HTTP) or Simple Mail Transfer Protocol (SMTP), for message negotiation
+          and transmission.
+          <a href="https://en.wikipedia.org/wiki/SOAP">(Wikipedia) target="_blank"</a>
+        </p>
+
+        <h2>About JAX-WS</h2>
+        <p>
+          <a href="https://netbeans.org/kb/docs/websvc/jax-ws.html" target="_blank">Java API for XML Web Services (JAX-WS)</a> is an essential part of Java EE for building a web service. The JAX-WS
+          2.2 specification JSR 224 defines a standard Java- to-WSDL mapping which determines how WSDL operations are bound
+          to Java methods when a SOAP message invokes a WSDL operation. This Java-to-WSDL mapping determines which Java method
+          gets invoked and how that SOAP message is mapped to the method’s parameters.
+          <a href="https://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services" target="_blank">(Wikipedia)</a>
+        </p>
+
+        <h2>About The Demo</h2>
+        <p>
+          This demo will ilustrate how SOAP messages are being transacted. This web service contains an encapsulation of simple id-name
+          table in a realtime database. They are six (out of seven) operations supported in web service that simulated in
+          this demo using client-side Javascript. We will see what are the XML request data from your computer and the XML
+          response data from the web service that establishing a SOAP communication.
+        </p>
+        <p>
+          <a href="https://sloth.cartjonye.com/person" target="_blank">Here is the endpoint</a> of the web service. From there you can download the WSDL file so you can access the web
+          service with your own client. (Please behave yourself while using it)
+          <br/> Note : Because i put this web service in a free-tier Heroku cloud. In the first time you access the web service,
+          <a href="https://devcenter.heroku.com/articles/free-dyno-hours#dyno-sleeping" target="_blank"> it will be likely in sleep mode</a>. The first request will be taking about 30 - 60 seconds to "wake up" the web
+          service, then a later request will behave normally. Sorry for the inconvenience.
+        </p>
+
+        <form id="ops-form" onsubmit="return false;" class="padding-top">
+          <div class="row">
+            <div class="grid-third">
+              <label for="operation">Select an operation :</label>
+            </div>
+            <div class="grid-two-thirds">
+              <select name="operation" id="operation" autocomplete="off">
+                <option value="get-all">Search all people (getPeople)</option>
+                <option value="get-query">Search people with query (getPeopleByNameQuery)</option>
+                <option value="get-id">Search a person with id (getPersonById)</option>
+                <option value="insert">Add a person (addPersonString)</option>
+                <option value="update">Update a person name with id (updatePersonNameById)</option>
+                <option value="delete">Delete a people with id (deletePersonById)</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="grid-three-fourths margin-top">
+              <div class="row">
+                <div class="grid-half">
+                  <div class="row row-middle">
+                    <div class="grid-fourth">
+                      <label for="id-input">id:</label>
+                    </div>
+                    <div class="grid-three-fourths">
+                      <input type="text" name="id-input" id="id-input" class="no-margin-bottom" autocomplete="off" />
+                    </div>
+                  </div>
+                </div>
+                <div class="grid-half">
+                  <div class="row row-middle">
+                    <div class="grid-fourth">
+                      <label for="name-input">name:</label>
+                    </div>
+                    <div class="grid-three-fourths">
+                      <input type="text" name="name-input" id="name-input" class="no-margin-bottom" autocomplete="off" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid-fourth margin-top">
+              <input type="submit" value="Submit Operation" id="submit-ops">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="grid-third"></div>
+    </div>
+    <div class="row margin-top">
+      <div class="grid-two-thirds">
+        <label for="request-xml">XML Request:</label>
+        <pre><textarea name="request-xml" id="request-xml" readonly="readonly" autocomplete="off"></textarea></pre>
+        <label for="response-xml">XML Response:</label>
+        <pre><textarea name="response-xml" id="response-xml" readonly="readonly" autocomplete="off"></textarea></pre>
+      </div>
+      <div class="grid-third max-20rem">
+        <label for="output-table">Output Table:</label>
+        <span id="output-status">Data will be shown here</span>
+        <table id="output-table" class="table-striped table-responsive margin-top" hidden="hidden">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="2">Data will be shown here</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr/>
+    <div class="row margin-top">
+      <div class="grid-two-thirds">
+        <p>Entire source code of ppk.cartjonye.com can be found at
+          <a href="https://github.com/cartjonye/ppkweb-demo">here</a>.</p>
+      </div>
+      <div class="grid-third"></div>
+    </div>
+  </div>
+</body>
+
+</html>

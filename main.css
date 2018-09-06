@@ -1,3 +1,9 @@
 body {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+.max-20rem {
+  max-height: 30rem;
+  display: block;
+  overflow-y: auto;
+}

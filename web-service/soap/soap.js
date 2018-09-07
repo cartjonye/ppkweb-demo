@@ -1,3 +1,13 @@
+if (!String.prototype.encodeHTML) {
+  String.prototype.encodeHTML = function () {
+    return this.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/"/g, '&quot;')
+               .replace(/'/g, '&apos;');
+  };
+}
+
 function dataWrapper(content) {
   return (
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
@@ -37,7 +47,7 @@ function opsGetAll(callback) {
 function opsGetQuery(name, callback) {
   var content = dataWrapper(
     '    <ns0:getPeopleByNameQuery xmlns:ns0="http://sloth.cartjonye.com/">\n' +
-    '      <name>' + encodeURI(name) + '</name>\n' +
+    '      <name>' + name.encodeHTML() + '</name>\n' +
     '    </ns0:getPeopleByNameQuery>');
 
   requestWrapper(content, callback);
@@ -46,7 +56,7 @@ function opsGetQuery(name, callback) {
 function opsGetId(id, callback) {
   var content = dataWrapper(
     '    <ns0:getPersonById xmlns:ns0="http://sloth.cartjonye.com/">\n' +
-    '      <id>' + encodeURI(id) + '</id>\n' +
+    '      <id>' + id.encodeHTML() + '</id>\n' +
     '    </ns0:getPersonById>');
 
   requestWrapper(content, callback);
@@ -55,8 +65,8 @@ function opsGetId(id, callback) {
 function opsInsert(id, name, callback) {
   var content = dataWrapper(
     '    <ns0:addPersonString xmlns:ns0="http://sloth.cartjonye.com/">\n' +
-    '      <id>' + encodeURI(id) + '</id>\n' +
-    '      <name>' + encodeURI(name) + '</name>\n' +
+    '      <id>' + id.encodeHTML() + '</id>\n' +
+    '      <name>' + name.encodeHTML() + '</name>\n' +
     '    </ns0:addPersonString>');
 
   requestWrapper(content, callback);
@@ -65,8 +75,8 @@ function opsInsert(id, name, callback) {
 function opsUpdate(id, name, callback) {
   var content = dataWrapper(
     '    <ns0:updatePersonNameById xmlns:ns0="http://sloth.cartjonye.com/">\n' +
-    '      <id>' + encodeURI(id) + '</id>\n' +
-    '      <name>' + encodeURI(name) + '</name>\n' +
+    '      <id>' + id.encodeHTML() + '</id>\n' +
+    '      <name>' + name.encodeHTML() + '</name>\n' +
     '    </ns0:updatePersonNameById>');
 
   requestWrapper(content, callback);
@@ -75,7 +85,7 @@ function opsUpdate(id, name, callback) {
 function opsDelete(id, callback) {
   var content = dataWrapper(
     '    <ns0:deletePersonById xmlns:ns0="http://sloth.cartjonye.com/">\n' +
-    '      <id>' + encodeURI(id) + '</id>\n' +
+    '      <id>' + id.encodeHTML() + '</id>\n' +
     '    </ns0:deletePersonById>');
 
   requestWrapper(content, callback);
